@@ -1,26 +1,37 @@
 package org.primefaces.test;
 
-import java.io.Serializable;
+import org.primefaces.event.ToggleEvent;
+
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 @Named
 @ViewScoped
 public class TestView implements Serializable {
-    
-    private String testString;
-    
-    @PostConstruct  
+
+    private List<String> rows;
+
+    @PostConstruct
     public void init() {
-        testString = "Welcome to PrimeFaces!!!";
+        rows = Arrays.asList("Apple");
     }
 
-    public String getTestString() {
-        return testString;
+    public List<String> getRows() {
+        return rows;
     }
 
-    public void setTestString(String testString) {
-        this.testString = testString;
-    }    
+    public void onRowToggle(ToggleEvent event) {
+        System.out.println("Row toggled");
+    }
+
+    public String getInput() {
+        return "";
+    }
+    public void setInput(String value) {
+        System.out.println("skipChildren ignored!");
+    }
 }
